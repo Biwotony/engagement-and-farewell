@@ -5,6 +5,7 @@ const reaction = document.getElementById("reaction");
 const reactionText = document.getElementById("reactionText");
 const detailsButton = document.getElementById("detailsButton");
 let currentScreen = 0;
+let transitioning = false;
 
 // This invitation is a fixed slideshow, never a document that scrolls.
 window.addEventListener("wheel", (event) => event.preventDefault(), { passive: false });
@@ -14,6 +15,20 @@ window.addEventListener("keydown", (event) => {
 });
 
 function showScreen(index) {
+  if (transitioning || index === currentScreen) return;
+  if (index === 4) {
+    transitioning = true;
+    screens[currentScreen].classList.add("mapFoldOut");
+    window.setTimeout(() => {
+      screens[currentScreen].classList.remove("active", "mapFoldOut");
+      steps[currentScreen].classList.remove("active");
+      currentScreen = index;
+      screens[currentScreen].classList.add("active");
+      steps[currentScreen].classList.add("active");
+      transitioning = false;
+    }, 470);
+    return;
+  }
   screens[currentScreen].classList.remove("active");
   steps[currentScreen].classList.remove("active");
   currentScreen = index;
@@ -56,6 +71,7 @@ document.getElementById("replayButton").addEventListener("click", () => {
   choices.forEach((item) => item.classList.remove("selected"));
   reaction.classList.remove("show");
   detailsButton.classList.remove("show");
+  transitioning = false;
   showScreen(0);
 });
 document.getElementById("celebrateButton").addEventListener("click", launchConfetti);
