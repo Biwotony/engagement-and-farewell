@@ -19,6 +19,25 @@ function showScreen(index) {
   currentScreen = index;
   screens[currentScreen].classList.add("active");
   steps[currentScreen].classList.add("active");
+  if (currentScreen === 5) window.setTimeout(launchConfetti, 260);
+}
+
+function launchConfetti() {
+  const container = document.getElementById("confetti");
+  const colours = ["#f4eee2", "#d9c4a8", "#b39674", "#8a6245", "#a57b49"];
+  container.replaceChildren();
+  for (let index = 0; index < 72; index += 1) {
+    const piece = document.createElement("i");
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = colours[Math.floor(Math.random() * colours.length)];
+    piece.style.animationDelay = `${Math.random() * 0.8}s`;
+    piece.style.animationDuration = `${3.2 + Math.random() * 2.7}s`;
+    piece.style.setProperty("--drift", `${-90 + Math.random() * 180}px`);
+    piece.style.setProperty("--spin", `${360 + Math.random() * 720}deg`);
+    piece.classList.toggle("petal", index % 5 === 0);
+    container.appendChild(piece);
+  }
+  window.setTimeout(() => container.replaceChildren(), 7000);
 }
 
 document.getElementById("openInvitation").addEventListener("click", () => showScreen(1));
@@ -39,6 +58,7 @@ document.getElementById("replayButton").addEventListener("click", () => {
   detailsButton.classList.remove("show");
   showScreen(0);
 });
+document.getElementById("celebrateButton").addEventListener("click", launchConfetti);
 
 const eventTime = new Date("2026-08-22T10:00:00+03:00").getTime();
 function updateCountdown() {
