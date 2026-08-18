@@ -6,13 +6,19 @@ const reactionText = document.getElementById("reactionText");
 const detailsButton = document.getElementById("detailsButton");
 let currentScreen = 0;
 
+// This invitation is a fixed slideshow, never a document that scrolls.
+window.addEventListener("wheel", (event) => event.preventDefault(), { passive: false });
+window.addEventListener("touchmove", (event) => event.preventDefault(), { passive: false });
+window.addEventListener("keydown", (event) => {
+  if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) event.preventDefault();
+});
+
 function showScreen(index) {
   screens[currentScreen].classList.remove("active");
   steps[currentScreen].classList.remove("active");
   currentScreen = index;
   screens[currentScreen].classList.add("active");
   steps[currentScreen].classList.add("active");
-  screens[currentScreen].scrollTop = 0;
 }
 
 document.getElementById("openInvitation").addEventListener("click", () => showScreen(1));
