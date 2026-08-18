@@ -83,3 +83,14 @@ body{touch-action:none}
 @keyframes sceneIn{from{opacity:0;transform:scale(1.025) translateY(8px)}to{opacity:1;transform:none}}
 @media(max-width:760px){.details.screen.active{display:block!important}}
 @media(prefers-reduced-motion:reduce){.screen.active{animation:none}}
+
+.confetti{position:absolute;z-index:8;inset:0;overflow:hidden;pointer-events:none}
+.confetti i{position:absolute;top:-24px;width:9px;height:17px;border-radius:1px;opacity:.95;animation:confettiFall linear forwards}
+.confetti i.petal{width:13px;height:20px;border-radius:80% 0 80% 0}
+@keyframes confettiFall{0%{translate:0 -10%;rotate:0deg}100%{translate:var(--drift) 108dvh;rotate:var(--spin)}}
+.finale>*:not(.confetti){position:relative;z-index:9}
+.finalActions{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:30px}
+.celebrateButton,.replayButton{border:0;border-bottom:1px solid #dbc4a7;padding:8px 2px;background:transparent;color:#ead7bf;cursor:pointer;font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.replayButton{margin-top:0}
+@media(max-width:560px){.finalActions{flex-direction:column;gap:8px;margin-top:22px}}
+@media(prefers-reduced-motion:reduce){.confetti i{animation-duration:.01ms!important}}
