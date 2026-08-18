@@ -12,3 +12,17 @@
 .finale{display:grid;place-items:center;align-content:center;text-align:center;color:white;background:var(--brown)}.finalMark{display:grid;place-items:center;width:78px;height:78px;margin-bottom:28px;border:1px solid #d8bd9c;border-radius:50%;color:#f2dec5;font:italic 3rem Georgia,serif}.finale>p{margin:0 0 12px;color:#d9c4a8;font-size:.65rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase}.finale h2{margin:0;font-size:clamp(2.8rem,6.5vw,6rem);line-height:1.05}.finale h2 em{color:#e1c39f}.finalDate{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.24);letter-spacing:.34em;font:700 .75rem Georgia,serif}footer{display:flex;justify-content:space-between;gap:20px;padding:24px max(24px,calc((100vw - 1120px)/2));background:var(--brown-dark);color:#cdb89e;font-size:.55rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
 @media(max-width:760px){.hero{padding-inline:14px}.heroFrame{padding:72px 24px 62px}.heroFrame::after{display:none}h1 em{display:inline}.choiceGrid{grid-template-columns:1fr}.choiceCard{min-height:145px}.details{grid-template-columns:1fr;padding-inline:20px}.detailsCopy{padding:15px 4px 58px}.portrait{min-height:590px}.countdownGrid{grid-template-columns:1fr 1fr;gap:24px 0}.countdownUnit:nth-child(2){border-right:0}.location::before{inset:18px}footer{flex-direction:column;text-align:center}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* One-screen reveal experience */
+html,body,main{height:100%;overflow:hidden}
+main{position:relative}
+.invitationBody{display:contents;max-height:none;opacity:1;overflow:visible}
+.screen{position:absolute!important;inset:0;z-index:1;width:100%;height:100svh;min-height:100svh;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;opacity:0;transform:translateY(22px) scale(.985);pointer-events:none;transition:opacity .55s ease,transform .55s ease,visibility .55s}
+.screen.active{z-index:2;visibility:visible;opacity:1;transform:none;pointer-events:auto}
+.stepNav{position:fixed;z-index:20;top:18px;left:50%;translate:-50%;display:flex;gap:8px;padding:8px 11px;border-radius:20px;background:rgba(244,238,226,.84);backdrop-filter:blur(10px)}
+.stepNav span{width:18px;height:3px;background:rgba(111,75,51,.25);transition:width .3s,background .3s}.stepNav span.active{width:34px;background:var(--brown)}
+.details{padding-bottom:150px}.floatingNext{position:absolute;z-index:5;right:max(24px,calc((100vw - 1120px)/2));bottom:45px;background:var(--cream);color:var(--brown-dark)}
+.countdown{display:grid;place-items:center}.countdownInner{width:min(900px,100%);text-align:center}.countdown h2{margin:0 0 52px;font-size:clamp(3rem,7vw,6rem)}
+.locationActions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}.buttonOutline{border:1px solid var(--brown);background:transparent;color:var(--brown)}
+.replayButton{margin-top:32px;border:0;border-bottom:1px solid #dbc4a7;padding:8px 2px;background:transparent;color:#ead7bf;cursor:pointer;font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+@media(max-width:760px){.screen{padding-top:70px}.hero.screen{padding-top:70px}.details.screen{display:block}.details .portrait{margin-top:15px}.floatingNext{position:relative;right:auto;bottom:auto;margin:30px 4px 10px}.countdown.screen{display:grid}.stepNav{top:12px}.locationActions{flex-direction:column;align-items:center}}
