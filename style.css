@@ -94,3 +94,30 @@ body{touch-action:none}
 .replayButton{margin-top:0}
 @media(max-width:560px){.finalActions{flex-direction:column;gap:8px;margin-top:22px}}
 @media(prefers-reduced-motion:reduce){.confetti i{animation-duration:.01ms!important}}
+
+/* Animated journey to KapNg’etich */
+.screen.mapFoldOut{animation:mapFoldOut .47s cubic-bezier(.6,.02,.8,.35) forwards!important;transform-origin:50% 100%}
+@keyframes mapFoldOut{0%{opacity:1;transform:perspective(900px) rotateX(0) scale(1)}100%{opacity:0;transform:perspective(900px) rotateX(-78deg) scale(.92)}}
+.routeAnimation{position:relative;width:min(560px,82vw);height:130px;margin:0 auto 8px}
+.routeAnimation svg{display:block;width:100%;height:100%;overflow:visible}
+.routeLine{fill:none;stroke:var(--brown);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:8 10;opacity:.58;stroke-dashoffset:720}
+.routeStart,.routeTraveller,.routeDestination{position:absolute;display:grid;place-items:center;color:var(--brown)}
+.routeStart{left:1%;top:69%;font-size:.72rem;opacity:0}
+.routeTraveller{left:2%;top:70%;width:12px;height:12px;border:3px solid var(--paper);border-radius:50%;background:var(--gold);color:transparent;box-shadow:0 0 0 2px var(--brown);opacity:0}
+.routeDestination{right:1%;top:22%;width:48px;height:48px;border:1px solid var(--gold);border-radius:50%;background:var(--paper);font-size:1.55rem;opacity:0}
+.location.active .routeLine{animation:drawRoute 1.45s .18s ease-out forwards}
+.location.active .routeStart{animation:routeFade .25s .12s forwards}
+.location.active .routeTraveller{animation:travelRoute 1.45s .2s cubic-bezier(.42,0,.45,1) forwards}
+.location.active .routeDestination{animation:pinDrop .55s 1.5s cubic-bezier(.16,.9,.35,1.35) forwards}
+.location .mapCard>.overline,.location .mapCard>h2,.location .mapCard>p,.location .locationActions{opacity:0;transform:translateY(14px)}
+.location.active .mapCard>.overline{animation:revealRouteCopy .45s 1.75s forwards}
+.location.active .mapCard>h2{animation:revealRouteCopy .55s 1.88s forwards}
+.location.active .mapCard>p{animation:revealRouteCopy .45s 2.02s forwards}
+.location.active .locationActions{animation:revealRouteCopy .5s 2.15s forwards}
+@keyframes drawRoute{from{stroke-dashoffset:720}to{stroke-dashoffset:0}}
+@keyframes routeFade{to{opacity:1}}
+@keyframes travelRoute{0%{left:2%;top:70%;opacity:1}22%{left:20%;top:17%}42%{left:40%;top:72%}64%{left:58%;top:34%}82%{left:76%;top:10%}100%{left:92%;top:31%;opacity:1}}
+@keyframes pinDrop{0%{opacity:0;transform:translateY(-55px) scale(.6)}70%{opacity:1;transform:translateY(7px) scale(1.08)}100%{opacity:1;transform:none}}
+@keyframes revealRouteCopy{to{opacity:1;transform:none}}
+@media(max-width:560px){.routeAnimation{height:98px;margin-bottom:2px}.routeDestination{width:40px;height:40px;font-size:1.3rem}.location.active .mapCard>h2{font-size:clamp(2.4rem,12vw,3.6rem)}}
+@media(prefers-reduced-motion:reduce){.screen.mapFoldOut{animation:none!important}.routeLine{stroke-dashoffset:0}.routeStart,.routeTraveller,.routeDestination,.location .mapCard>.overline,.location .mapCard>h2,.location .mapCard>p,.location .locationActions{opacity:1;transform:none;animation:none!important}}
